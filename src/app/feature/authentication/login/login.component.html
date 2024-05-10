@@ -1,0 +1,35 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <img src="assets/layout/images/XX.png" alt="logo" class="mb-5 w-6rem flex-shrink-0">
+    <div
+      style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(110, 110, 120, 05) 30%);">
+      <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+        <div class="text-center mb-5">
+          <div class="text-900 text-3xl font-medium mb-3">Welcome to school X</div>
+          <span class="text-600 font-medium">Login to continue</span>
+        </div>
+        <form [formGroup]="form">
+          <label class="block text-900 text-xl font-medium mb-2">Username</label>
+          <input type="text" #userNameRef placeholder="Username" formControlName="userName" pInputText
+                 class="w-full md:w-30rem mb-5" style="padding:1rem">
+          <label class="block text-900 font-medium text-xl mb-2">Password</label>
+          <input type="password" placeholder="Password" formControlName="password" pInputText
+                 class="w-full md:w-30rem mb-5" style="padding:1rem">
+          <div class="flex align-items-center justify-content-between mb-5 gap-5">
+            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)"
+               routerLink="/forgot-password">Forgot password?</a>
+          </div>
+          <button pButton pRipple [disabled]="!form.valid" (click)="login()" label="Login"
+                  class="w-full p-3 text-xl"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <p-dialog header="Response" [(visible)]="display" [modal]="true" [style]="{width: '450px'}" [baseZIndex]="10000"
+            [draggable]="false" [resizable]="false">
+    <p class="m-0">{{message}}</p>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="display=false" label="Close" class="p-button-text"></p-button>
+    </ng-template>
+  </p-dialog>
+</div>
