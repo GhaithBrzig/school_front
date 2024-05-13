@@ -1,0 +1,32 @@
+/* Style for the Classes table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  /* Style for table header */
+  .table th {
+    background-color: #343a40;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+  }
+  
+  /* Style for table body */
+  .table td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+  }
+  
+  /* Alternate row color */
+  .table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  
+  /* Hover effect */
+  .table tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  

@@ -1,11 +1,10 @@
+import { Classe } from "./Classe";
 
-import {User} from "./User";
-import {Classe} from "./Classe";
-import {Parent} from "./Parent";
-import {Evaluation} from "./Evaluation";
-
-export class Eleve extends User{
+export interface Eleve {
+  eleveId?: number;
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  phoneNumber: string;
   classe?: Classe;
-  parents?: Parent[];
-  evaluations?: Evaluation[];
 }

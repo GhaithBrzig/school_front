@@ -1,1 +1,26 @@
-<p>classes-list works!</p>
+<h2>Classes</h2>
+
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Niveau</th>
+      <th>Nom</th>
+      <th>Number of Students</th>
+      <th>Assigned Students</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let classe of classes">
+      <td>{{ classe.id }}</td>
+      <td>{{ classe.niveau }}</td>
+      <td>{{ classe.nom }}</td>
+      <td>{{ classe.nbrEleves }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let eleve of classe.eleves">{{ eleve.firstName }} {{ eleve.lastName }}</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

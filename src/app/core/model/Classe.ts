@@ -1,11 +1,9 @@
-import { Eleve } from './Eleve';
-import { Enseignant } from './enseignant.model';
+import { Eleve } from "./Eleve";
 
-export class Classe {
+export interface Classe {
   id?: number;
-  niveau?: string;
-  nom?: string;
-  nbrEleves?: number;
-  eleves?: Eleve[];
-  enseignants?: Enseignant[];
+  niveau: string;
+  nom: string;
+  nbrEleves: number;
+  eleves: Eleve[];
 }
