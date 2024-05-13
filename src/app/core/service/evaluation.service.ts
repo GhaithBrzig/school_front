@@ -8,7 +8,7 @@ import {Evaluation} from "../model/Evaluation";
   providedIn: 'root'
 })
 export class EvaluationService {
-  private baseUrl = 'http://localhost:8080/evaluations';
+  private baseUrl = 'http://localhost:8082/evaluations';
 
   constructor(private http: HttpClient) { }
 
@@ -30,5 +30,9 @@ export class EvaluationService {
 
   deleteEvaluation(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  }
+
+  getEvaluationsByEnseignantId(enseignantId: number | undefined): Observable<Evaluation[]> {
+    return this.http.get<Evaluation[]>(`${this.baseUrl}/enseignant/${enseignantId}`);
   }
 }

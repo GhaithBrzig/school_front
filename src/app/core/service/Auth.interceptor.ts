@@ -33,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (err.status === 401) {
             let header = new HttpHeaders()
               .set("Authorization", "Bearer " + this.authenticationService.getFromLocalStorage('refreshToken'));
-            return this.httpclient.get<string>("http://localhost:8080/authentication/refresh", {headers: header}).pipe(
+            return this.httpclient.get<string>("http://localhost:8082/authentication/refresh", {headers: header}).pipe(
               switchMap((resp: any) => {
                 this.authenticationService.setToLocalStorage('accessToken', resp.accessToken);
                 let cloned = req.clone({

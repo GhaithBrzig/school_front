@@ -1,5 +1,6 @@
 import { Eleve } from './Eleve';
-import { Enseignant } from './enseignant.model';
+import {Enseignant} from "./Enseignant";
+
 
 export class Classe {
   id?: number;

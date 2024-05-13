@@ -1,1 +1,40 @@
-<p>evaluations-form works!</p>
+<form *ngIf="evaluationForm" [formGroup]="evaluationForm" (ngSubmit)="onSubmit()" class="mt-4">
+  <div class="mb-3">
+    <label for="evaluationName" class="form-label">Evaluation Name:</label>
+    <input type="text" id="evaluationName" formControlName="nom" class="form-control" [ngClass]="{ 'is-invalid': evaluationForm.get('nom')?.invalid && (evaluationForm.get('nom')?.dirty || evaluationForm.get('nom')?.touched) }">
+    <div *ngIf="evaluationForm.get('nom')?.invalid && (evaluationForm.get('nom')?.dirty || evaluationForm.get('nom')?.touched)" class="invalid-feedback">
+      Evaluation Name is required.
+    </div>
+  </div>
+
+  <div formArrayName="questions">
+    <div *ngFor="let question of questions.controls; let i=index" [formGroupName]="i" class="mb-4">
+      <hr>
+      <label for="questionText" class="form-label">Question Text:</label>
+      <input type="text" id="questionText" formControlName="text" class="form-control" [ngClass]="{ 'is-invalid': question.get('text')?.invalid && (question.get('text')?.dirty || question.get('text')?.touched) }">
+      <div *ngIf="question.get('text')?.invalid && (question.get('text')?.dirty || question.get('text')?.touched)" class="invalid-feedback">
+        Question Text is required.
+      </div>
+
+      <div formArrayName="answers">
+        <div *ngFor="let answer of getAnswersControls(i); let j=index" [formGroupName]="j" class="mt-2">
+          <label for="answerText" class="form-label">Answer {{ j+1 }}:</label>
+          <input type="text" id="answerText" formControlName="text" class="form-control" [ngClass]="{ 'is-invalid': answer.get('text')?.invalid && (answer.get('text')?.dirty || answer.get('text')?.touched) }">
+          <div *ngIf="answer.get('text')?.invalid && (answer.get('text')?.dirty || answer.get('text')?.touched)" class="invalid-feedback">
+            Answer Text is required.
+          </div>
+
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="correct" class="form-check-input"> Correct
+          </label>
+        </div>
+      </div>
+
+      <button type="button" (click)="removeQuestion(i)" class="btn btn-danger mt-2">Remove Question</button>
+    </div>
+  </div>
+
+  <button type="button" (click)="addQuestion()" class="btn btn-primary mt-3">Add Question</button>
+  <button type="submit" class="btn btn-success mt-3" [disabled]="!evaluationForm.valid || questions.length === 0">Submit</button>
+
+</form>
