@@ -8,7 +8,8 @@ const routes: Routes = [
       {path:'dashboard',loadChildren:()=>import('./feature/dashboard/dashboard.module').then(m=>m.DashboardModule)},
       {path:'git init',loadChildren:()=>import('./feature/accountmanagement/accountmanagement.module').then(m=>m.AccountmanagementModule)},
     ]},
-  { path: 'classes', loadChildren: () => import('./feature/classes/classes.module').then(m => m.ClassesModule) }
+  { path: 'classes', loadChildren: () => import('./feature/classes/classes.module').then(m => m.ClassesModule) },
+  { path: 'evaluations', loadChildren: () => import('./feature/evaluations/evaluations.module').then(m => m.EvaluationsModule) }
 
 ];
 
