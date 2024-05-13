@@ -7,6 +7,7 @@ import { EvaluationsListComponent } from './evaluations-list/evaluations-list.co
 import { EvaluationsFormComponent } from './evaluations-form/evaluations-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { EvaluationsDetailsComponent } from './evaluations-details/evaluations-details.component';
+import { PassEvaluationComponent } from './pass-evaluation/pass-evaluation.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { EvaluationsDetailsComponent } from './evaluations-details/evaluations-d
     EvaluationsComponent,
     EvaluationsListComponent,
     EvaluationsFormComponent,
-    EvaluationsDetailsComponent
+    EvaluationsDetailsComponent,
+    PassEvaluationComponent
   ],
   imports: [
     CommonModule,
