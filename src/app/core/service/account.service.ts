@@ -59,6 +59,18 @@ export class AccountService {
       responseType:'text' as 'json'
     });
   }
+  public addPassedEvaluation(userId: number, evaluationId: number): Observable<string> {
+    console.log(userId)
+    const params = new HttpParams()
+      .set('userId', String(userId))  // Convert userId to string here
+      .set('evaluationId', String(evaluationId));  // Convert evaluationId to string here
+
+    return this.http.post<string>(this.host + "account/add-passed-evaluation", null, {
+      params,
+      responseType: 'text' as 'json'
+    });
+  }
+
 
   public updateProfile(updateProfile:UpdateProfileDto):Observable<string>{
     return this.http.post<string>(this.host+"account/update-profile", updateProfile,{
