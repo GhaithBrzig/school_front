@@ -1,5 +1,4 @@
 import { Eleve } from './Eleve';
-import { Enseignant } from './enseignant.model';
 
 export class Classe {
   id?: number;
@@ -7,5 +6,4 @@ export class Classe {
   nom?: string;
   nbrEleves?: number;
   eleves?: Eleve[];
-  enseignants?: Enseignant[];
 }
