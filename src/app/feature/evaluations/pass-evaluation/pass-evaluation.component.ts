@@ -23,6 +23,7 @@ export class PassEvaluationComponent implements OnInit, CanComponentDeactivate {
   answers: Map<number, number> = new Map(); // Map<QuestionIndex, SelectedAnswerIndex>
   user?: Eleve; // Assuming you have a User model
   selectedAnswers: number[] = [];
+  private submitted?: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -82,18 +83,39 @@ export class PassEvaluationComponent implements OnInit, CanComponentDeactivate {
     // @ts-ignore
     this.evaluation.questions.forEach((question, index) => {
       const selectedAnswerIndex = this.answers.get(index);
-      if (selectedAnswerIndex !== null && selectedAnswerIndex !== undefined) {
-        // @ts-ignore
-        const selectedAnswer = question.answers[selectedAnswerIndex];
-        if (selectedAnswer.correct) {
-          score += 2;
-        }
+      if (selectedAnswerIndex === null || selectedAnswerIndex === undefined) {
+        return 0; // Return 0 if no answer was selected
+      }
+      // Ensure that question is defined
+      if (question === undefined) {
+        return 0;
+      }
+
+      // Ensure that selectedAnswerIndex is a valid index
+      // @ts-ignore
+      if (selectedAnswerIndex < 0 || selectedAnswerIndex >= question.answers.length) {
+        return 0;
+      }
+
+      // @ts-ignore
+      const selectedAnswer = question.answers[selectedAnswerIndex];
+
+      // Ensure that selectedAnswer is defined
+      if (selectedAnswer === undefined) {
+        return 0;
+      }
+
+      if (selectedAnswer.correct) {
+        score += 2;
       }
     });
     return score;
   }
 
+
+
   submitEvaluation() {
+    this.submitted = true;
     const submitAction = 'submit';
     Swal.fire({
       title: 'Submit Evaluation',
@@ -145,6 +167,12 @@ export class PassEvaluationComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.submitted) {
+      // Evaluation has been submitted, allow deactivation without warning
+      return true;
+    }
+
+    // Evaluation has not been submitted, show warning message
     return Swal.fire({
       title: 'Warning',
       text: 'Leaving this page will result in you failing the evaluation. Are you sure you want to proceed?',
@@ -156,4 +184,5 @@ export class PassEvaluationComponent implements OnInit, CanComponentDeactivate {
       return result.isConfirmed;
     });
   }
+
 }
