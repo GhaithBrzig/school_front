@@ -35,9 +35,17 @@ export class PassEvaluationComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.getProfile().subscribe(
       (profile) => {
-        this.user = profile;
+        this.user = profile as Eleve;
         console.log('User Profile:', this.user);
 
+        if (this.user && this.evaluationId) {
+          // Add evaluation to passed evaluations list on init
+          // @ts-ignore
+          this.accountService.addPassedEvaluation(this.user?.userId, this.evaluationId).subscribe(
+            () => console.log('Added to passed evaluations'),
+            (error) => console.error('Error adding to passed evaluations:', error)
+          );
+        }
       },
       (error) => {
         console.error('Error fetching user profile:', error);
@@ -48,8 +56,6 @@ export class PassEvaluationComponent implements OnInit {
       this.evaluationId = params.get('id');
       this.loadEvaluation();
     });
-
-
   }
 
   loadEvaluation() {
@@ -113,14 +119,14 @@ export class PassEvaluationComponent implements OnInit {
 
           // Add the evaluation to the list of passed evaluations for the user
           // @ts-ignore
-          this.accountService.addPassedEvaluation(this.user?.userId, this.evaluationId).subscribe(() => {
+
             this.router.navigate(['/home/evaluations']); // Redirect to dashboard or wherever
             Swal.fire(
               'Success!',
               `Evaluation ${submitAction}d successfully.`,
               'success'
             );
-          });
+
         }, (error) => {
           if (error instanceof HttpErrorResponse) {
             console.log(this.user?.userId)

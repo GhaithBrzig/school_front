@@ -28,6 +28,10 @@ export class EvaluationService {
     return this.http.put(`${this.baseUrl}/${id}`, evaluation);
   }
 
+  getEvaluationsByClassId(classeId: number): Observable<Evaluation[]> {
+    return this.http.get<Evaluation[]>(`${this.baseUrl}/classe/${classeId}`);
+  }
+
   deleteEvaluation(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
