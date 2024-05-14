@@ -33,14 +33,23 @@ export class PassEvaluationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.accountService.getProfile().subscribe(
+      (profile) => {
+        this.user = profile;
+        console.log('User Profile:', this.user);
+
+      },
+      (error) => {
+        console.error('Error fetching user profile:', error);
+      }
+    );
+
     this.route.paramMap.subscribe(params => {
       this.evaluationId = params.get('id');
       this.loadEvaluation();
     });
 
-    this.accountService.getProfile().subscribe(user => {
-      this.user = user;
-    });
+
   }
 
   loadEvaluation() {
@@ -101,38 +110,45 @@ export class PassEvaluationComponent implements OnInit {
         };
 
         this.evaluationResultService.createEvaluationResult(evaluationResult).subscribe(() => {
-            // Add the evaluation to the list of passed evaluations for the user
-            // this.user.passedEvaluations.push(this.evaluationId);
-            // this.accountService.updateUser(this.user).subscribe(() => {
+
+          // Add the evaluation to the list of passed evaluations for the user
+          // @ts-ignore
+          this.accountService.addPassedEvaluation(this.user?.userId, this.evaluationId).subscribe(() => {
             this.router.navigate(['/home/evaluations']); // Redirect to dashboard or wherever
-            // });
             Swal.fire(
               'Success!',
               `Evaluation ${submitAction}d successfully.`,
               'success'
             );
-          },
-          (error) => {
-            if (error instanceof HttpErrorResponse) {
-              this.router.navigate(['/home/evaluations']); // Redirect to dashboard or wherever
-              // Handle HttpErrorResponse errors
-              Swal.fire(
-                'Success!',
-                `Evaluation ${submitAction}d successfully.`,
-                'success'
-              );
-            } else {
-              // Handle other errors
-              Swal.fire(
-                'Error!',
-                `An unexpected error occurred.`,
-                'error'
-              );
-            }
           });
+        }, (error) => {
+          if (error instanceof HttpErrorResponse) {
+            console.log(this.user?.userId)
+
+            // @ts-ignore
+            this.accountService.addPassedEvaluation(this.user?.userId, this.evaluationId).subscribe(() => {
+
+            });
+            this.router.navigate(['/home/evaluations']); // Redirect to dashboard or wherever
+            // Handle HttpErrorResponse errors
+            Swal.fire(
+              'Success!',
+              `Evaluation ${submitAction}d successfully.`,
+              'success'
+            );
+          } else {
+            // Handle other errors
+            Swal.fire(
+              'Error!',
+              `An unexpected error occurred.`,
+              'error'
+            );
+          }
+        });
       }
     });
   }
+
 
 
 }
