@@ -2,17 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule for common directives
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
-import { FormEleveComponent } from './formEleve/formEleve.component';
-import { EleveRoutingModule } from './eleves-routing.module';
-import { ListEleveComponent } from './listEleve/listEleve.component';
+import {EnseignantRoutingModule } from './enseignant-routing.module';
+import { EnseignantFormComponent } from './EnseignantForm/EnseignantForm.component';
 
 @NgModule({
-  declarations: [FormEleveComponent,ListEleveComponent],
+  declarations: [EnseignantFormComponent],
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
-    EleveRoutingModule
+    EnseignantRoutingModule
   ]
 })
-export class ElevesModule { }
+export class EnseignantModule { }

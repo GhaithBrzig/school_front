@@ -1,5 +1,6 @@
 <!-- app.component.html -->
 <form (ngSubmit)="onSubmit()">
+  <h1>Add a New Eleve</h1>
   <label for="userName">Username</label>
   <input type="text" id="userName" name="userName" [(ngModel)]="newEleve.userName" required>
 
@@ -17,6 +18,11 @@
 
   <label for="phoneNumber">Phone Number</label>
   <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="newEleve.phoneNumber" required>
+
+  <label for="classeId">Classe</label>
+  <select id="classeId" name="classeId" [(ngModel)]="selectedClasseId" required>
+    <option *ngFor="let classe of classes" [ngValue]="classe.id">{{classe.nom}}</option>
+  </select>
 
   <button type="submit">Submit</button>
 </form>

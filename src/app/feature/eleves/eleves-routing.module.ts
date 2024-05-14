@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormEleveComponent } from './formEleve/formEleve.component';
+import { ListEleveComponent } from './listEleve/listEleve.component';
 
 const routes: Routes = [
-  {path:'test',component:FormEleveComponent},
+  {path:'addEleve',component:FormEleveComponent},
+  {path:'showEleve',component:ListEleveComponent},
+
 ];
 
 @NgModule({
