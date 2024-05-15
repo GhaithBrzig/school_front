@@ -5,7 +5,9 @@
       <th>ID</th>
       <th>Name</th>
       <th>Level</th>
+      <th>nbrEleves</th>
       <th>Actions</th>
+
     </tr>
   </thead>
   <tbody>
@@ -13,8 +15,10 @@
       <td>{{ classe.id }}</td>
       <td>{{ classe.nom }}</td>
       <td>{{ classe.niveau }}</td>
+      <td>{{ classe.nbrEleves }}</td>
+
       <td>
-        <!-- <button (click)="editClasse(classe)">Edit</button> -->
+        <button (click)="editClasse(classe)">Edit</button>
         <button (click)="deleteClasse(classe.id)">Delete</button>
       </td>
     </tr>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Classe } from 'src/app/core/model/Classe';
 import { ClasseService } from 'src/app/core/service/classe.service';
 import Swal from 'sweetalert2';
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 export class ClassesListComponent implements OnInit {
   classes: Classe[] = [];
 
-  constructor(private classeService: ClasseService) { }
+  constructor(private classeService: ClasseService,private router: Router) { }
 
   ngOnInit(): void {    
     this.getAllClasses();
@@ -64,6 +65,10 @@ export class ClassesListComponent implements OnInit {
         );
       }
     });
+  }
+
+  editClasse(classe: Classe) {
+    this.router.navigate(['/home/classes/edit', classe.id]);
   }
 
 
