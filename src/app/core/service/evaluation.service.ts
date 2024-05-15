@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Classe } from '../model/Classe';
+import {Evaluation} from "../model/Evaluation";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class EvaluationService {
     return this.http.put(`${this.baseUrl}/${id}`, evaluation);
   }
 
-  getEvaluationsByClassId(classeId: number): Observable<Evaluation[]> {
+  getEvaluationsByClassId(classeId: number | undefined): Observable<Evaluation[]> {
     return this.http.get<Evaluation[]>(`${this.baseUrl}/classe/${classeId}`);
   }
 

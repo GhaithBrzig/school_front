@@ -43,8 +43,8 @@ export class EvaluationsListComponent implements OnInit {
           } else {
             // User is an Eleve
             const eleve = this.user as Eleve;
-            if (eleve.classe && eleve.classe.id) {
-              this.evaluationService.getEvaluationsByClassId(eleve.classe.id).subscribe(
+            if (eleve.classeId) {
+              this.evaluationService.getEvaluationsByClassId(eleve.classeId).subscribe(
                 (evaluations) => {
                   console.log('Evaluations:', evaluations);
                   this.evaluations = evaluations.filter(evaluation =>
