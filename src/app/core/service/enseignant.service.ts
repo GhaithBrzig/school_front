@@ -13,7 +13,9 @@ export class EnseignantService {
   constructor(private http: HttpClient) { }
 
   createEnseignant(roleName: string, classeId: number, matiere: string, enseignant: Enseignant): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}?roleName=${roleName}&classeId=${classeId}&matiere=${matiere}`, enseignant);
+    const matiereString = matiere.toString();
+
+    return this.http.post<string>(`${this.baseUrl}?roleName=${roleName}&classeId=${classeId}&matiere=${matiereString}`, enseignant);
   }
 
   getClassesByEnseignantId(enseignantId: number): Observable<Classe[]> {

@@ -152,7 +152,6 @@ export class EvaluationsFormComponent implements OnInit {
 
             },
             (error) => {
-              // Check if the error is an HttpErrorResponse
               if (error instanceof HttpErrorResponse) {
                 // Ignore the error, as it might be due to the expected non-JSON response
                 Swal.fire(

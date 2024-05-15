@@ -1,1 +1,22 @@
-<p>classes-list works!</p>
+<h2>List of Classes</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Level</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let classe of classes">
+      <td>{{ classe.id }}</td>
+      <td>{{ classe.nom }}</td>
+      <td>{{ classe.niveau }}</td>
+      <td>
+        <!-- <button (click)="editClasse(classe)">Edit</button> -->
+        <button (click)="deleteClasse(classe.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

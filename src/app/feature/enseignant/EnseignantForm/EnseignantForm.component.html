@@ -1,31 +1,60 @@
-<!-- app.component.html -->
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" #enseignantForm="ngForm">
   <h1>Add a New Enseignant</h1>
   <label for="userName">Username</label>
-  <input type="text" id="userName" name="userName" [(ngModel)]="newEnseignant.userName" required>
+  <input type="text" id="userName" name="userName" [(ngModel)]="newEnseignant.userName" required minlength="3" maxlength="20" #userName="ngModel">
+  <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="alert alert-danger">
+    <div *ngIf="userName.errors?.['required']">Username is required.</div>
+    <div *ngIf="userName.errors?.['minlength']">Username must be at least 3 characters long.</div>
+    <div *ngIf="userName.errors?.['maxlength']">Username cannot exceed 20 characters.</div>
+  </div>
 
   <label for="firstName">First Name</label>
-  <input type="text" id="firstName" name="firstName" [(ngModel)]="newEnseignant.firstName" required>
+  <input type="text" id="firstName" name="firstName" [(ngModel)]="newEnseignant.firstName" required pattern="^[a-zA-Z ]+$" #firstName="ngModel">
+  <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+    <div *ngIf="firstName.errors?.['required']">First name is required.</div>
+    <div *ngIf="firstName.errors?.['pattern']">First name can only contain letters and spaces.</div>
+  </div>
 
   <label for="lastName">Last Name</label>
-  <input type="text" id="lastName" name="lastName" [(ngModel)]="newEnseignant.lastName" required>
+  <input type="text" id="lastName" name="lastName" [(ngModel)]="newEnseignant.lastName" required pattern="^[a-zA-Z ]+$" #lastName="ngModel">
+  <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+    <div *ngIf="lastName.errors?.['required']">Last name is required.</div>
+    <div *ngIf="lastName.errors?.['pattern']">Last name can only contain letters and spaces.</div>
+  </div>
 
   <label for="password">Password</label>
-  <input type="password" id="password" name="password" [(ngModel)]="newEnseignant.password" required>
+  <input type="password" id="password" name="password" [(ngModel)]="newEnseignant.password" required [pattern]="passwordPattern" #password="ngModel">
+  <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+    <div *ngIf="password.errors?.['required']">Password is required.</div>
+    <div *ngIf="password.errors?.['pattern']">Password must be at least 8 characters long and contain at least one letter and one number.</div>
+  </div>
 
   <label for="emailAddress">Email Address</label>
-  <input type="email" id="emailAddress" name="emailAddress" [(ngModel)]="newEnseignant.emailAddress" required>
+  <input type="email" id="emailAddress" name="emailAddress" [(ngModel)]="newEnseignant.emailAddress" required email #emailAddress="ngModel">
+  <div *ngIf="emailAddress.invalid && (emailAddress.dirty || emailAddress.touched)" class="alert alert-danger">
+    <div *ngIf="emailAddress.errors?.['required']">Email address is required.</div>
+    <div *ngIf="emailAddress.errors?.['email']">Invalid email address format.</div>
+  </div>
 
   <label for="phoneNumber">Phone Number</label>
-  <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="newEnseignant.phoneNumber" required>
+  <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="newEnseignant.phoneNumber" required pattern="^[0-9]+$" #phoneNumber="ngModel">
+  <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert alert-danger">
+    <div *ngIf="phoneNumber.errors?.['required']">Phone number is required.</div>
+    <div *ngIf="phoneNumber.errors?.['pattern']">Phone number can only contain digits.</div>
+  </div>
 
   <label for="classeId">Classe</label>
-  <select id="classeId" name="classeId" [(ngModel)]="selectedClasseId" required>
+  <select id="classeId" name="classeId" [(ngModel)]="selectedClasseId" required #classeId="ngModel">
+    <option value="" disabled selected>Select a classe</option>
     <option *ngFor="let classe of classes" [ngValue]="classe.id">{{classe.nom}}</option>
   </select>
+  <div *ngIf="classeId.invalid && (classeId.dirty || classeId.touched)" class="alert alert-danger">
+    <div *ngIf="classeId.errors?.['required']">Please select a classe.</div>
+  </div>
 
   <label for="matiere">Matiere</label>
-    <select id="matiere" name="matiere" [(ngModel)]="newEnseignant.matiere" required>
+  <select id="matiere" name="matiere" [(ngModel)]="newEnseignant.matiere" required #matiere="ngModel">
+    <option value="" disabled selected>Select a subject</option>
     <option value="MATH">Math</option>
     <option value="PHYSICS">Physics</option>
     <option value="CHEMISTRY">Chemistry</option>
@@ -34,7 +63,10 @@
     <option value="FRENCH">French</option>
     <option value="HISTORY">History</option>
     <option value="GEOGRAPHY">Geography</option>
-    </select>
+  </select>
+  <div *ngIf="matiere.invalid && (matiere.dirty || matiere.touched)" class="alert alert-danger">
+    <div *ngIf="matiere.errors?.['required']">Please select a subject.</div>
+  </div>
 
-  <button type="submit">Submit</button>
+  <button type="submit" [disabled]="enseignantForm.invalid">Submit</button>
 </form>
