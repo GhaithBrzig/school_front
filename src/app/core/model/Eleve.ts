@@ -12,4 +12,5 @@ export class Eleve extends User{
   classeName?: string;
 
 
+  passedEvaluations?: Evaluation[];
 }

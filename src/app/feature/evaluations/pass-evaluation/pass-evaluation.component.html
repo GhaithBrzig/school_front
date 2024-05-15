@@ -1,0 +1,15 @@
+<div *ngIf="evaluation" class="evaluation-container">
+  <h3>{{ evaluation.nom }}</h3>
+  <div *ngFor="let question of evaluation.questions; let i = index" class="question">
+    <h4>{{ question.text }}</h4>
+    <ul class="list-unstyled">
+      <li *ngFor="let answer of question.answers; let j = index" class="answer">
+        <label [ngClass]="{'selected': selectedAnswers[i] === j}">
+          <input type="radio" [name]="'question-' + i" [value]="j" (change)="selectAnswer(i, j)">
+          {{ answer.text }}
+        </label>
+      </li>
+    </ul>
+  </div>
+  <button class="btn btn-primary" (click)="submitEvaluation()">Submit</button>
+</div>

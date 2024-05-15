@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card mt-5">
+        <div class="card-header">
+          <h4>{{ evaluation?.nom }}</h4>
+          <button class="btn btn-secondary edit-btn" [routerLink]="['/home/evaluations/edit', evaluation?.id]">Edit</button>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let question of evaluation?.questions; let i = index" class="mb-4 question">
+            <h5>Question {{ i + 1 }}: {{ question.text }}</h5>
+            <ul class="list-group answer-list">
+              <li *ngFor="let answer of question.answers" class="list-group-item answer" [class.correct-answer]="answer.correct">
+                <span class="answer-text">{{ answer.text }}</span>
+                <span class="answer-icon" *ngIf="answer.correct">&#10004;</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a routerLink="/home/evaluations" class="btn btn-primary back-btn">Back to Evaluations</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
