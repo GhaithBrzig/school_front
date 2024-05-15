@@ -1,0 +1,40 @@
+<!-- app.component.html -->
+<form (ngSubmit)="onSubmit()">
+  <h1>Add a New Enseignant</h1>
+  <label for="userName">Username</label>
+  <input type="text" id="userName" name="userName" [(ngModel)]="newEnseignant.userName" required>
+
+  <label for="firstName">First Name</label>
+  <input type="text" id="firstName" name="firstName" [(ngModel)]="newEnseignant.firstName" required>
+
+  <label for="lastName">Last Name</label>
+  <input type="text" id="lastName" name="lastName" [(ngModel)]="newEnseignant.lastName" required>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" [(ngModel)]="newEnseignant.password" required>
+
+  <label for="emailAddress">Email Address</label>
+  <input type="email" id="emailAddress" name="emailAddress" [(ngModel)]="newEnseignant.emailAddress" required>
+
+  <label for="phoneNumber">Phone Number</label>
+  <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="newEnseignant.phoneNumber" required>
+
+  <label for="classeId">Classe</label>
+  <select id="classeId" name="classeId" [(ngModel)]="selectedClasseId" required>
+    <option *ngFor="let classe of classes" [ngValue]="classe.id">{{classe.nom}}</option>
+  </select>
+
+  <label for="matiere">Matiere</label>
+    <select id="matiere" name="matiere" [(ngModel)]="newEnseignant.matiere" required>
+    <option value="MATH">Math</option>
+    <option value="PHYSICS">Physics</option>
+    <option value="CHEMISTRY">Chemistry</option>
+    <option value="BIOLOGY">Biology</option>
+    <option value="ENGLISH">English</option>
+    <option value="FRENCH">French</option>
+    <option value="HISTORY">History</option>
+    <option value="GEOGRAPHY">Geography</option>
+    </select>
+
+  <button type="submit">Submit</button>
+</form>

@@ -1,1 +1,18 @@
-<p>classes-form works!</p>
+<div class="container">
+    <h2>Add New Class</h2>
+    <form #classForm="ngForm" (ngSubmit)="onSubmit(classForm.value)">
+      <div class="form-group">
+        <label for="niveau">Class Level</label>
+        <input type="text" class="form-control" id="niveau" name="niveau" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="nom">Class Name</label>
+        <input type="text" class="form-control" id="nom" name="nom" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="nbrEleves">Number of Students</label>
+        <input type="number" class="form-control" id="nbrEleves" name="nbrEleves" ngModel required>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!classForm.valid">Add Class</button>
+    </form>
+  </div>

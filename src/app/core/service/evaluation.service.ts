@@ -1,34 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Evaluation} from "../model/Evaluation";
-
+import { Classe } from '../model/Classe';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EvaluationService {
-  private baseUrl = 'http://localhost:8080/evaluations';
+export class ClasseService {
+  private baseUrl = 'http://localhost:8082/classes';
 
   constructor(private http: HttpClient) { }
 
-  createEvaluation(evaluation: Evaluation): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, evaluation);
+  getAllClasses(): Observable<Classe[]> {
+    return this.http.get<Classe[]>(`${this.baseUrl}`);
   }
 
-  getEvaluationById(id: number): Observable<Evaluation> {
-    return this.http.get<Evaluation>(`${this.baseUrl}/${id}`);
+  getClassById(id: number): Observable<Classe> {
+    return this.http.get<Classe>(`${this.baseUrl}/${id}`);
   }
 
-  getAllEvaluations(): Observable<Evaluation[]> {
-    return this.http.get<Evaluation[]>(`${this.baseUrl}`);
+  createClasse(classe: Classe): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, classe);
   }
 
-  updateEvaluation(id: number, evaluation: Evaluation): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, evaluation);
+  updateClasse(id: number, classe: Classe): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, classe);
   }
 
-  deleteEvaluation(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  deleteClasse(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }
