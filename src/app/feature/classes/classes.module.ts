@@ -5,6 +5,7 @@ import { ClassesRoutingModule } from './classes-routing.module';
 import { ClassesComponent } from './classes.component';
 import { ClassesListComponent } from './classes-list/classes-list.component';
 import { ClassesFormComponent } from './classes-form/classes-form.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ClassesFormComponent } from './classes-form/classes-form.component';
   ],
   imports: [
     CommonModule,
-    ClassesRoutingModule
+    ClassesRoutingModule,
+    FormsModule
   ]
 })
 export class ClassesModule { }

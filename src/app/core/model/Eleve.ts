@@ -8,5 +8,9 @@ export class Eleve extends User{
   classe?: Classe;
   parents?: Parent[];
   evaluations?: Evaluation[];
+  classeId?: number;
+  classeName?: string;
+
+
   passedEvaluations?: Evaluation[];
 }

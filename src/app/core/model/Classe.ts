@@ -8,5 +8,6 @@ export class Classe {
   nom?: string;
   nbrEleves?: number;
   eleves?: Eleve[];
-  enseignants?: Enseignant[];
+  enseignants?: any[]; // Replace with the actual Enseignant interface if needed
+
 }
