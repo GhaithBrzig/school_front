@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Classe } from 'src/app/core/model/Classe';
 import { ClasseService } from 'src/app/core/service/classe.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-classes-form',
@@ -9,7 +11,7 @@ import { ClasseService } from 'src/app/core/service/classe.service';
 })
 export class ClassesFormComponent implements OnInit {
 
-  constructor(private classeService: ClasseService) { }
+  constructor(private classeService: ClasseService,private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,11 +27,23 @@ export class ClassesFormComponent implements OnInit {
       .subscribe(
         response => {
           console.log('Class created successfully:', response);
-          // Reset the form or perform any other actions
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Class created successfully!'
+          }).then(() => {
+            this.router.navigate(['/home/classes/claaseslist']);
+          });
         },
         error => {
           console.error('Error creating class:', error);
-          // Handle the error
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Class created successfully!'
+          }).then(() => {
+            this.router.navigate(['/home/classes/claaseslist']);
+          });
         }
       );
   }
