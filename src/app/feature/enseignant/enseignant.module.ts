@@ -4,9 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {EnseignantRoutingModule } from './enseignant-routing.module';
 import { EnseignantFormComponent } from './EnseignantForm/EnseignantForm.component';
+import { ListFormEnseignantComponent } from './ListFormEnseignant/ListFormEnseignant.component';
+import { AssignEnseignantToClassComponent } from './AssignEnseignantToClass/AssignEnseignantToClass.component';
 
 @NgModule({
-  declarations: [EnseignantFormComponent],
+  declarations: [EnseignantFormComponent,ListFormEnseignantComponent,AssignEnseignantToClassComponent],
   imports: [
     CommonModule,
     FormsModule,
