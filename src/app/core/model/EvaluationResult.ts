@@ -7,4 +7,5 @@ export class EvaluationResult {
   eleve?: Eleve;
   evaluation?: Evaluation;
   score?: number;
+  expired?: boolean;
 }

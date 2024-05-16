@@ -14,6 +14,8 @@
           <p>Evaluation Name: {{ evaluation.evaluation?.nom }}</p>
           <!-- Add any other details related to the evaluation -->
         </div>
+        <!-- Render "Expired" in red if evaluation is expired -->
+        <span class="expired" *ngIf="evaluation.expired">Expired</span>
       </div>
     </div>
   </div>
