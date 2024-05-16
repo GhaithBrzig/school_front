@@ -67,6 +67,14 @@ export class ClassesListComponent implements OnInit {
     });
   }
 
+  assignEvaluation(classeId?: number): void {
+    if (!classeId) {
+      console.error('Invalid class ID');
+      return;
+    }
+    this.router.navigate(['/home/evaluations/form', classeId]);
+  }
+
   editClasse(classe: Classe) {
     this.router.navigate(['/home/classes/edit', classe.id]);
   }

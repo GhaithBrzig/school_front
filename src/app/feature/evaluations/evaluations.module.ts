@@ -16,7 +16,8 @@ import { PassEvaluationComponent } from './pass-evaluation/pass-evaluation.compo
     EvaluationsListComponent,
     EvaluationsFormComponent,
     EvaluationsDetailsComponent,
-    PassEvaluationComponent
+    PassEvaluationComponent,
+
   ],
   imports: [
     CommonModule,

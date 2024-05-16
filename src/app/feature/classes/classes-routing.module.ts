@@ -8,7 +8,8 @@ import { ClassesDetailsComponent } from './classes-details/classes-details.compo
 const routes: Routes = [
   { path: 'claaseslist', component: ClassesListComponent },
   { path: 'claasesform', component: ClassesFormComponent },
-  { path: 'edit/:id', component: ClassesDetailsComponent }
+  { path: 'edit/:id', component: ClassesDetailsComponent },
+
 
 ];
 

@@ -31,4 +31,9 @@ export class ClasseService {
   deleteClasse(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
+
+  assignEvaluationToClasse(classeId: number, evaluationId: number): Observable<void> {
+    const url = `${this.baseUrl}/${classeId}/evaluations/${evaluationId}`;
+    return this.http.post<void>(url, null);
+  }
 }
