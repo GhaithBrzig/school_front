@@ -3,7 +3,7 @@ import { AccountService } from "../../../core/service/account.service";
 import { EvaluationService } from "../../../core/service/evaluation.service";
 import { User } from "../../../core/model/User";
 import { Role } from "../../../core/model/Role";
-import { Evaluation } from "../../../core/model/Evaluation";
+import {DurationEnum, Evaluation} from "../../../core/model/Evaluation";
 import { Eleve } from "../../../core/model/Eleve";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
@@ -69,6 +69,43 @@ export class EvaluationsListComponent implements OnInit {
     );
   }
 
+  getTimeLeft(deadline: Date): string {
+    const now = new Date();
+    const timeDifference = new Date(deadline).getTime() - now.getTime();
+
+    // Check if deadline is passed
+    if (timeDifference < 0) {
+      return 'Expired';
+    }
+
+    // Calculate time left
+    const hoursLeft = Math.floor(timeDifference / (1000 * 60 * 60));
+    const minutesLeft = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const secondsLeft = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+    return `${hoursLeft}h ${minutesLeft}m ${secondsLeft}s`;
+  }
+
+  isEvaluationExpired(deadline: Date): boolean {
+    const now = new Date();
+    return now.getTime() > new Date(deadline).getTime();
+  }
+
+  getDurationText(duration: DurationEnum): string {
+    switch (duration) {
+      case DurationEnum.MINUTES_15:
+        return '15 minutes';
+      case DurationEnum.MINUTES_30:
+        return '30 minutes';
+      case DurationEnum.MINUTES_45:
+        return '45 minutes';
+      case DurationEnum.MINUTES_60:
+        return '60 minutes';
+      default:
+        return '';
+    }
+  }
+
   confirmStartEvaluation(evaluationId: number | undefined): void {
     Swal.fire({
       title: 'Start Evaluation',
@@ -83,4 +120,6 @@ export class EvaluationsListComponent implements OnInit {
       }
     });
   }
+
+  protected readonly DurationEnum = DurationEnum;
 }

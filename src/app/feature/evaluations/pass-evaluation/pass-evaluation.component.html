@@ -11,5 +11,8 @@
       </li>
     </ul>
   </div>
-  <button class="btn btn-primary" (click)="submitEvaluation()">Submit</button>
+  <div *ngIf="timer">
+    <p>Time remaining: {{ timeLeft | date: 'mm:ss' }}</p>
+  </div>
+  <button class="btn btn-primary" (click)="submitEvaluationManual()">Submit</button>
 </div>

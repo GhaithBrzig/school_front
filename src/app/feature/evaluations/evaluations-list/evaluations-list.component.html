@@ -33,9 +33,13 @@
           <br>
           <div class="name">{{ evaluation.classe?.nom }}</div>
           <br>
+          <div class="timer" *ngIf="evaluation.deadline">
+            <span [ngClass]="{ 'expired': isEvaluationExpired(evaluation.deadline) }">Time left: {{ getTimeLeft(evaluation.deadline) }}</span>
+            <br>
+            <span class="duration" *ngIf="evaluation.duration">Duration: {{ getDurationText(evaluation.duration) }}</span>
+          </div>
           <button class="btn btn-warning" [routerLink]="['/home/evaluations/details', evaluation.id]" *ngIf="role">See Details</button>
           <button class="btn btn-danger" (click)="confirmStartEvaluation(evaluation.id)" *ngIf="!role">Start Evaluation</button>
-
         </div>
       </div>
     </div>

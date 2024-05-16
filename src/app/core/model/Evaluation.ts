@@ -15,8 +15,8 @@ export class Evaluation {
 }
 
 export enum DurationEnum {
-  MINUTES_15 = '15',
-  MINUTES_30 = '30',
-  MINUTES_45 = '45',
-  MINUTES_60 = '60'
+  MINUTES_15 = 'MINUTES_15',
+  MINUTES_30 = 'MINUTES_30',
+  MINUTES_45 = 'MINUTES_45',
+  MINUTES_60 = 'MINUTES_60'
 }
