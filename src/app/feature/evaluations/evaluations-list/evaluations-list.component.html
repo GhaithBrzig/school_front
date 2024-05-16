@@ -33,7 +33,7 @@
           <br>
           <div class="name">{{ evaluation.classe?.nom }}</div>
           <br>
-          <button class="btn btn-warning" [routerLink]="['/home/evaluations', evaluation.id]" *ngIf="role">See Details</button>
+          <button class="btn btn-warning" [routerLink]="['/home/evaluations/details', evaluation.id]" *ngIf="role">See Details</button>
           <button class="btn btn-danger" (click)="confirmStartEvaluation(evaluation.id)" *ngIf="!role">Start Evaluation</button>
 
         </div>

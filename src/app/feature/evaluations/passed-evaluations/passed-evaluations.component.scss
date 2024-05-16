@@ -1,0 +1,38 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.evaluation-card {
+  margin-bottom: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.card-title {
+  margin: 0;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.card-body p strong {
+  color: #333;
+}

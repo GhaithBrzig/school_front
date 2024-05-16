@@ -30,5 +30,9 @@ export class EvaluationResultService {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
 
+  getEvaluationResultsByUserId(userId: number | undefined): Observable<EvaluationResult[]> {
+    return this.http.get<EvaluationResult[]>(`${this.baseUrl}/user/${userId}`);
+  }
+
 
 }

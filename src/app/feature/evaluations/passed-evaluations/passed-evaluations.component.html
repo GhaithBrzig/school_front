@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Passed Evaluations</h2>
+  <div class="evaluation-card" *ngFor="let evaluation of evaluationResults">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">{{ evaluation.evaluation?.nom }}</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Score:</strong> {{ evaluation.score }}</p>
+        <!-- Add more details if available -->
+        <div>
+          <p><strong>Evaluation Details:</strong></p>
+          <p>Evaluation ID: {{ evaluation.evaluation?.id }}</p>
+          <p>Evaluation Name: {{ evaluation.evaluation?.nom }}</p>
+          <!-- Add any other details related to the evaluation -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

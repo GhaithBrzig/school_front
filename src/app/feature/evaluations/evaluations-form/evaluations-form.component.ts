@@ -4,9 +4,9 @@ import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '
 import Swal from "sweetalert2";
 import { EvaluationService } from "../../../core/service/evaluation.service";
 import { AccountService } from "../../../core/service/account.service";
-import { User } from "../../../core/model/User";
 import { Enseignant } from "../../../core/model/Enseignant";
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-evaluations-form',
@@ -20,7 +20,7 @@ export class EvaluationsFormComponent implements OnInit {
   evaluationId: any;
 
   constructor(private fb: FormBuilder, private evaluationService: EvaluationService, private accountService: AccountService, private route: ActivatedRoute,
-  private router:Router) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.accountService.getProfile().subscribe(
@@ -52,6 +52,8 @@ export class EvaluationsFormComponent implements OnInit {
         // Patch the form values with the fetched evaluation data
         this.evaluationForm?.patchValue({
           nom: evaluation.nom,
+          deadline: evaluation.deadline,
+          duration: evaluation.duration,
           enseignant: this.user // Assuming this.user contains the current user's information
         });
 
@@ -87,14 +89,15 @@ export class EvaluationsFormComponent implements OnInit {
   createForm() {
     this.evaluationForm = this.fb.group({
       nom: ['', Validators.required],
+      deadline: ['', Validators.required],
+      duration: ['', Validators.required],
       enseignant: [this.user], // Assuming this.user contains the current user's information
       questions: this.fb.array([])
     });
   }
 
   get questions(): FormArray {
-    // @ts-ignore
-    return this.evaluationForm.get('questions') as FormArray;
+    return this.evaluationForm?.get('questions') as FormArray;
   }
 
   addQuestion() {
@@ -123,7 +126,6 @@ export class EvaluationsFormComponent implements OnInit {
 
   onSubmit() {
     if (this.evaluationForm?.valid) {
-      console.log(this.evaluationForm.value.enseignant);
       const submitAction = this.isEdit ? 'update' : 'create';
       Swal.fire({
         title: 'Are you sure?',
@@ -134,10 +136,17 @@ export class EvaluationsFormComponent implements OnInit {
         cancelButtonText: 'Cancel'
       }).then((result) => {
         if (result.isConfirmed) {
+          // Parse deadline to JavaScript Date object
+          const deadlineISO: string = new Date(this.evaluationForm?.value.deadline).toISOString();
+
+          const evaluationData = {
+            ...this.evaluationForm?.value,
+            deadline: deadlineISO
+          };
 
           const observable = this.isEdit ?
-            this.evaluationService.updateEvaluation(this.evaluationId!, this.evaluationForm?.value) :
-            this.evaluationService.createEvaluation(this.evaluationForm?.value);
+            this.evaluationService.updateEvaluation(this.evaluationId!, evaluationData) :
+            this.evaluationService.createEvaluation(evaluationData);
           this.router.navigate(['/home/evaluations']); // Navigate to a new route
           observable.subscribe(
             () => {
@@ -184,9 +193,10 @@ export class EvaluationsFormComponent implements OnInit {
     }
   }
 
+
   getAnswersControls(questionIndex: number): AbstractControl[] {
     // @ts-ignore
-    return (this.evaluationForm.get('questions').at(questionIndex).get('answers') as FormArray).controls;
+    return (this.evaluationForm?.get('questions').at(questionIndex).get('answers') as FormArray).controls;
   }
 
 }
