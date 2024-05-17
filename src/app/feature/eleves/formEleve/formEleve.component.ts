@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Classe } from 'src/app/core/model/Classe';
 import { Eleve } from 'src/app/core/model/Eleve';
 import { ClasseService } from 'src/app/core/service/classe.service';
@@ -14,7 +15,7 @@ export class FormEleveComponent implements OnInit {
   classes: Classe[] = []; // Array to hold the list of classes
   selectedClasseId!: number; // Variable to hold the selected class ID
 
-  constructor(private eleveService: EleveService,private classeService: ClasseService) { }
+  constructor(private eleveService: EleveService,private classeService: ClasseService,private route:Router) { }
 
   ngOnInit(): void {
     this.classeService.getAllClasses().subscribe(
@@ -42,10 +43,15 @@ export class FormEleveComponent implements OnInit {
     this.eleveService.createEleve(this.newEleve, roleName, this.selectedClasseId).subscribe(
       response => {
         console.log('New eleve created successfully!', response);
+        this.route.navigate(['home/eleves/showEleve']);
+
+
         this.newEleve = new Eleve();
       },
       error => {
         console.error('Error creating new eleve:', error);
+        this.route.navigate(['home/eleves/showEleve']);
+
       }
     );
   }
