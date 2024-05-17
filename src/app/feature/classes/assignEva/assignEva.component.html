@@ -1,0 +1,9 @@
+<div>
+  <label>Select Evaluation:</label>
+  <select [(ngModel)]="selectedEvaluationId">
+    <option [ngValue]="undefined" disabled>Select an evaluation</option>
+    <option *ngFor="let evaluation of evaluations" [ngValue]="evaluation.id">{{ evaluation.nom }}</option>
+  </select>
+</div>
+
+<button (click)="assignEvaluationToClasse()" [disabled]="!selectedEvaluationId">Assign Evaluation</button>

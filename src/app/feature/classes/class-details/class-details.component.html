@@ -1,0 +1,28 @@
+<h2>Edit Class</h2>
+<form [formGroup]="classForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="nom" required>
+    <div *ngIf="classForm.get('nom')?.invalid && (classForm.get('nom')?.dirty || classForm.get('nom')?.touched)">
+      <div *ngIf="classForm.get('nom')?.errors?.['required']">Name is required.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="level">Level:</label>
+    <input type="text" id="level" formControlName="niveau" required>
+    <div *ngIf="classForm.get('niveau')?.invalid && (classForm.get('niveau')?.dirty || classForm.get('niveau')?.touched)">
+      <div *ngIf="classForm.get('niveau')?.errors?.['required']">Level is required.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="nbrEleves">Number of Students:</label>
+    <input type="number" id="nbrEleves" formControlName="nbrEleves" required>
+    <div *ngIf="classForm.get('nbrEleves')?.invalid && (classForm.get('nbrEleves')?.dirty || classForm.get('nbrEleves')?.touched)">
+      <div *ngIf="classForm.get('nbrEleves')?.errors?.['required']">Number of Students is required.</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="classForm.invalid">Save</button>
+</form>
