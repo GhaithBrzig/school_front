@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit {
         this.role = this.user.roles.find((r: { roleName: string; }) => r.roleName === "enseignant");
         this.roleE = this.user.roles.find((r: { roleName: string; }) => r.roleName === "eleve");
         this.roleA = this.user.roles.find((r: { roleName: string; }) => r.roleName === "admin");
-        console.log('User Profile:', this.user);
+        console.log('User Profile role:', this.role);
         if (this.user) {
           this.model = [
             {
@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit {
               items: [
                 { label: 'User management', icon: 'pi pi-fw pi-users', routerLink: ['/home/account/user-management'] },
                 { label: 'Profile', icon: 'pi pi-fw pi-user', routerLink: ['/home/account/profile'] },
-                { label: 'Evaluations', icon: 'pi pi-fw pi-book', routerLink: ['/home/evaluations'] },
+
 
 
               ]
@@ -47,16 +47,19 @@ export class MenuComponent implements OnInit {
           ];
 
           // Add "Classes" menu item only for users with admin role
-          if (this.roleA) {
-            this.model[1].items.push({ label: 'Classes', icon: 'pi pi-fw pi-users', routerLink: ['/home/classes/claaseslist'] });
-            this.model[2].items.push({ label: 'Enseignant', icon: 'pi pi-fw pi-user', routerLink: ['/home/enseignant/list'] });
-            this.model[3].items.push({ label: 'Eleves', icon: 'pi pi-fw pi-user-edit', routerLink: ['/home/eleves/showEleve'] });
-          }
+
           if (this.role) {
             this.model[1].items.push({ label: 'Classes', icon: 'pi pi-fw pi-users', routerLink: ['/home/classes/claaseslist'] });
+            this.model[1].items.push({ label: 'Evaluations', icon: 'pi pi-fw pi-book', routerLink: ['/home/evaluations'] });
           }
           if (this.roleE) {
             this.model[1].items.push({ label: 'Passed Evaluations', icon: 'pi pi-fw pi-users', routerLink: ['/home/evaluations/passed'] });
+            this.model[1].items.push({ label: 'Evaluations', icon: 'pi pi-fw pi-book', routerLink: ['/home/evaluations'] });
+          }
+          if (this.roleA) {
+            this.model[1].items.push({ label: 'Classes', icon: 'pi pi-fw pi-users', routerLink: ['/home/classes/claaseslist'] });
+            this.model[1].items.push({ label: 'Enseignant', icon: 'pi pi-fw pi-user', routerLink: ['/home/enseignant/list'] });
+            this.model[1].items.push({ label: 'Eleves', icon: 'pi pi-fw pi-user-edit', routerLink: ['/home/eleves/showEleve'] });
           }
         }
       },
