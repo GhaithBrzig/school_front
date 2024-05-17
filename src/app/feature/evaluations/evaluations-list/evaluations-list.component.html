@@ -39,7 +39,7 @@
             <span class="duration" *ngIf="evaluation.duration">Duration: {{ getDurationText(evaluation.duration) }}</span>
           </div>
           <button class="btn btn-warning" [routerLink]="['/home/evaluations/details', evaluation.id]" *ngIf="role">See Details</button>
-          <button class="btn btn-danger" (click)="confirmStartEvaluation(evaluation.id)" *ngIf="!role">Start Evaluation</button>
+          <button class="btn btn-danger" (click)="confirmStartEvaluation(evaluation.id)" *ngIf="roleE">Start Evaluation</button>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Classe } from 'src/app/core/model/Classe';
 import { Eleve } from 'src/app/core/model/Eleve';
 import { ClasseService } from 'src/app/core/service/classe.service';
 import { EleveService } from 'src/app/core/service/eleve.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-formEleve',
@@ -14,7 +15,7 @@ export class FormEleveComponent implements OnInit {
   classes: Classe[] = []; // Array to hold the list of classes
   selectedClasseId!: number; // Variable to hold the selected class ID
 
-  constructor(private eleveService: EleveService,private classeService: ClasseService) { }
+  constructor(private eleveService: EleveService,private classeService: ClasseService, private router:Router) { }
 
   ngOnInit(): void {
     this.classeService.getAllClasses().subscribe(
@@ -26,7 +27,7 @@ export class FormEleveComponent implements OnInit {
       }
     );
   }
- 
+
 
   onSubmit() {
     if (!this.selectedClasseId) {
@@ -42,12 +43,14 @@ export class FormEleveComponent implements OnInit {
     this.eleveService.createEleve(this.newEleve, roleName, this.selectedClasseId).subscribe(
       response => {
         console.log('New eleve created successfully!', response);
-        this.newEleve = new Eleve();
+        this.newEleve = new Eleve()
+
       },
       error => {
         console.error('Error creating new eleve:', error);
       }
     );
+    this.router.navigate(['/home/eleves/showEleve']); // Navigate to a new route
   }
 
 }

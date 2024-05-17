@@ -3,6 +3,7 @@ import { Classe } from 'src/app/core/model/Classe';
 import { Enseignant, Matiere } from 'src/app/core/model/Enseignant';
 import { ClasseService } from 'src/app/core/service/classe.service';
 import { EnseignantService } from 'src/app/core/service/enseignant.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-EnseignantForm',
@@ -15,7 +16,8 @@ export class EnseignantFormComponent implements OnInit {
   selectedClasseId!: number;
   matieres = Object.values(Matiere);
   constructor(    private enseignantService: EnseignantService,
-    private classeService: ClasseService
+    private classeService: ClasseService,
+                  private router:Router
 ) { }
 
 ngOnInit(): void {
@@ -58,6 +60,7 @@ onSubmit() {
         console.error('Error creating new teacher:', error);
       }
     );
+  this.router.navigate(['/home/enseignant/list']); // Navigate to a new route
 }
 
 

@@ -1,5 +1,8 @@
-<table>
-  <thead>
+<h2>List of Eleves</h2>
+<div class="table-container">
+  <button class="add-eleve-btn" routerLink="/home/eleves/addEleve">Add Eleve</button>
+  <table>
+    <thead>
     <tr>
       <th>Username</th>
       <th>First Name</th>
@@ -8,8 +11,8 @@
       <th>Phone Number</th>
       <th>Classe</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr *ngFor="let eleve of eleves">
       <td>{{eleve.userName}}</td>
       <td>{{eleve.firstName}}</td>
@@ -18,5 +21,6 @@
       <td>{{eleve.phoneNumber}}</td>
       <td>{{eleve.classeName}}</td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
