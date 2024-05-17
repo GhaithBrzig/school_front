@@ -31,7 +31,6 @@
           <br>
           {{ evaluation.nom }}
           <br>
-          <div class="name">{{ evaluation.classe?.nom }}</div>
           <br>
           <div class="timer" *ngIf="evaluation.deadline">
             <span [ngClass]="{ 'expired': isEvaluationExpired(evaluation.deadline) }">Time left: {{ getTimeLeft(evaluation.deadline) }}</span>

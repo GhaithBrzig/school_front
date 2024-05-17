@@ -51,6 +51,7 @@ export class MenuComponent implements OnInit {
           if (this.role) {
             this.model[1].items.push({ label: 'Classes', icon: 'pi pi-fw pi-users', routerLink: ['/home/classes/claaseslist'] });
             this.model[1].items.push({ label: 'Evaluations', icon: 'pi pi-fw pi-book', routerLink: ['/home/evaluations'] });
+            this.model[1].items.push({ label: 'Evaluation Results', icon: 'pi pi-fw pi-book', routerLink: ['/home/evaluations/passedResults'] });
           }
           if (this.roleE) {
             this.model[1].items.push({ label: 'Passed Evaluations', icon: 'pi pi-fw pi-users', routerLink: ['/home/evaluations/passed'] });

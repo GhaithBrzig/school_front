@@ -6,6 +6,9 @@ import {EvaluationsDetailsComponent} from "./evaluations-details/evaluations-det
 import {PassEvaluationComponent} from "./pass-evaluation/pass-evaluation.component";
 import {ConfirmLeaveGuardService} from "../../core/service/ConfirmLeaveGuard.service";
 import {PassedEvaluationsComponent} from "./passed-evaluations/passed-evaluations.component";
+import {
+  PassedEvaluationResultsByClassComponent
+} from "./passed-evaluation-results-by-class/passed-evaluation-results-by-class.component";
 
 const routes: Routes = [
   { path: '', component: EvaluationsListComponent },
@@ -14,6 +17,7 @@ const routes: Routes = [
   { path: 'passed', component: PassedEvaluationsComponent },
   { path: 'edit/:id', component: EvaluationsFormComponent },
   { path: 'pass/:id', component: PassEvaluationComponent, canDeactivate: [ConfirmLeaveGuardService] },
+  { path: 'passedResults', component: PassedEvaluationResultsByClassComponent },
 
 ];
 
