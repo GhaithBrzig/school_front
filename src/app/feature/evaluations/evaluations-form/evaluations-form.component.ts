@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import Swal from "sweetalert2";
 import { EvaluationService } from "../../../core/service/evaluation.service";
 import { AccountService } from "../../../core/service/account.service";
@@ -85,14 +85,21 @@ export class EvaluationsFormComponent implements OnInit {
       }
     );
   }
-
+  deadlineValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const selectedDate = new Date(control.value);
+      const currentDate = new Date();
+      return selectedDate > currentDate ? null : { 'invalidDeadline': true };
+    };
+  }
   createForm() {
+    const today = new Date().toISOString().split('T')[0]; // Get today's date
     this.evaluationForm = this.fb.group({
       nom: ['', Validators.required],
-      deadline: ['', Validators.required],
+      deadline: [today, [Validators.required, this.deadlineValidator()]], //
       duration: ['', Validators.required],
       enseignant: [this.user], // Assuming this.user contains the current user's information
-      questions: this.fb.array([])
+      questions: this.fb.array([], [this.minimumQuestions(10)]) // Add custom validator for minimum questions
     });
   }
 
@@ -193,10 +200,17 @@ export class EvaluationsFormComponent implements OnInit {
     }
   }
 
-
   getAnswersControls(questionIndex: number): AbstractControl[] {
     // @ts-ignore
     return (this.evaluationForm?.get('questions').at(questionIndex).get('answers') as FormArray).controls;
+  }
+
+  // Custom validator function for minimum questions
+  minimumQuestions(minimum: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const questionsArray = control.value as any[];
+      return questionsArray && questionsArray.length >= minimum ? null : { 'minimumQuestions': true };
+    };
   }
 
 }

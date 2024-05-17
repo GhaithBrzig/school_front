@@ -24,9 +24,9 @@
         </ul>
       </td>
       <td>
-        <button (click)="editClasse(classe)">Edit</button>
-        <button (click)="deleteClasse(classe.id)">Delete</button>
-        <button (click)="assignEvaluation(classe.id)">Assign Evaluation</button>
+        <button (click)="editClasse(classe)" *ngIf="roleA">Edit</button>
+        <button (click)="deleteClasse(classe.id)" *ngIf="roleA">Delete</button>
+        <button (click)="assignEvaluation(classe.id)" *ngIf="role">Assign Evaluation</button>
       </td>
     </tr>
     </tbody>

@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Classe } from 'src/app/core/model/Classe';
 import { ClasseService } from 'src/app/core/service/classe.service';
 import Swal from 'sweetalert2';
+import {Eleve} from "../../../core/model/Eleve";
+import {AccountService} from "../../../core/service/account.service";
+import {Role} from "../../../core/model/Role";
 
 @Component({
   selector: 'app-classes-list',
@@ -11,11 +14,31 @@ import Swal from 'sweetalert2';
 })
 export class ClassesListComponent implements OnInit {
   classes: Classe[] = [];
+  private user: any;
+  protected role: Role | undefined;
+  protected roleA: Role | undefined;
+  constructor(private classeService: ClasseService,private router: Router , private accountService:AccountService) { }
 
-  constructor(private classeService: ClasseService,private router: Router) { }
+  ngOnInit(): void {
 
-  ngOnInit(): void {    
-    this.getAllClasses();
+    this.accountService.getProfile().subscribe(
+    (profile) => {
+      this.user = profile;
+
+      this.role = this.user.roles.find((r: { roleName: string; }) => r.roleName === "enseignant");
+      this.roleA = this.user.roles.find((r: { roleName: string; }) => r.roleName === "admin");
+      console.log('User Profile:', this.user);
+      if (this.user) {
+        // Add evaluation to passed evaluations list on init
+
+        this.getAllClasses();
+      }
+    },
+    (error) => {
+      console.error('Error fetching user profile:', error);
+    }
+  );
+
   }
 
   getAllClasses() {
