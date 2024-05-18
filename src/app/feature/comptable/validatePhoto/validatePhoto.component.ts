@@ -1,23 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Eleve } from 'src/app/core/model/Eleve';
 import { Parent } from 'src/app/core/model/Parent';
+import { ComptableService } from 'src/app/core/service/comptables.service';
+import { EleveService } from 'src/app/core/service/eleve.service';
 import { ParentService } from 'src/app/core/service/parent.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-parent-list',
-  templateUrl: './parent-list.component.html',
-  styleUrls: ['./parent-list.component.css']
+  selector: 'app-validatePhoto',
+  templateUrl: './validatePhoto.component.html',
+  styleUrls: ['./validatePhoto.component.css']
 })
-export class ParentListComponent implements OnInit {
+export class ValidatePhotoComponent implements OnInit {
   parents: Parent[] = [];
   selectedFile: File | null = null;
   selectedParent: Parent | null = null;
+  photoStates = ['VALIDE', 'NON_VALIDE', 'PAS_TRAITER'];
+  comptableId!: number;
 
-  constructor(private parentService: ParentService,private router: Router) { }
+  constructor(private parentService: ParentService,private comptableService: ComptableService,private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    const urlParts = this.activatedRoute.snapshot.url.map(segment => segment.path);
+    const lastPart = urlParts[urlParts.length - 1];
+    this.comptableId = parseInt(lastPart, 10);
     this.getAllParents();
-
   }
 
   onFileSelected(event: any, parent: Parent) {
@@ -29,6 +37,8 @@ export class ParentListComponent implements OnInit {
     this.parentService.getAllParents().subscribe(
       (parents) => {
         this.parents = parents;
+        console.log(parents)
+
       },
       (error) => {
         console.error('Error fetching parents:', error);
@@ -93,5 +103,11 @@ export class ParentListComponent implements OnInit {
   getPhotoUrl(photo: Blob): string {
     return URL.createObjectURL(photo);
   }
-  
+
+  updateParentPhotoState(parentId: number, comptableId: number, photoState: string): void {
+    this.comptableService.updateParentPhotoState(parentId, comptableId, photoState).subscribe(
+      () => {
+        console.log(`Parent photo state updated to ${photoState}`);
+      },
+    )}
 }

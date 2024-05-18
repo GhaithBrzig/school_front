@@ -24,4 +24,9 @@ export class ComptableService {
   getAllComptables(): Observable<Comptable[]> {
     return this.http.get<Comptable[]>(this.baseUrl);
   }
+
+  updateParentPhotoState(parentId: number, comptableId: number, photoState: string): Observable<void> {
+    const url = `${this.baseUrl}/${comptableId}/parents/${parentId}/photo-state?photoState=${photoState}`;
+    return this.http.put<void>(url, {});
+  }
 }

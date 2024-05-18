@@ -9,6 +9,8 @@
       <th>Last Name</th>
       <th>Email Address</th>
       <th>Phone Number</th>
+      <th>Document State</th>
+
       <th>Assigned Eleves</th>
       <th>Actions</th>
     </tr>
@@ -21,8 +23,11 @@
       <td>{{ parent.lastName }}</td>
       <td>{{ parent.emailAddress }}</td>
       <td>{{ parent.phoneNumber }}</td>
-
-
+      <td>
+        <select [(ngModel)]="parent.photoState" (change)="parent.userId ? updateParentPhotoState(parent.userId, comptableId, parent.photoState!) : null">
+          <option *ngFor="let state of photoStates" [ngValue]="state">{{state}}</option>
+        </select>
+      </td>
       <td>
         <ul *ngIf="parent.enfants && parent.enfants.length > 0; else noElevesAssigned">
           <li *ngFor="let eleve of parent.enfants">{{ eleve.userName }}</li>  
@@ -32,15 +37,6 @@
         </ng-template>
       </td>
       <td>
-        <button class="btn btn-danger" (click)="deleteParent(parent.userId!)">Delete</button>
-        <button class="btn btn-success" (click)="navigateToAssignClasses(parent.userId)">Assign Eleve</button>
-        <div class="form-group">
-          <div class="custom-file-input">
-            <input type="file" class="custom-file-input" id="customFileInput" (change)="onFileSelected($event, parent)">
-            <label class="custom-file-label" for="customFileInput">Choose a file</label>
-          </div>
-        </div>
-        <button class="btn btn-primary" (click)="uploadPhoto(parent)">Upload Photo</button>
       </td>
     </tr>
   </tbody>
