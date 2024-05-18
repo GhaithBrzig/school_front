@@ -10,7 +10,9 @@ const routes: Routes = [
       { path: 'classes', loadChildren: () => import('./feature/classes/classes.module').then(m => m.ClassesModule) },
       { path: 'evaluations', loadChildren: () => import('./feature/evaluations/evaluations.module').then(m => m.EvaluationsModule) },
       { path: 'eleves', loadChildren: () => import('./feature/eleves/eleves.module').then(m => m.ElevesModule) },
-      { path: 'enseignant', loadChildren: () => import('./feature/enseignant/enseignant.module').then(m => m.EnseignantModule) }
+      { path: 'enseignant', loadChildren: () => import('./feature/enseignant/enseignant.module').then(m => m.EnseignantModule) },
+      { path: 'parent', loadChildren: () => import('./feature/parent/parent.module').then(m => m.ParentModule) }
+
     ]},
  
 

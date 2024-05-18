@@ -1,0 +1,15 @@
+<div *ngIf="parent">
+  <h2>Assign {{ parent.firstName }} {{ parent.lastName }} to a Student</h2>
+  <div *ngIf="eleves.length > 0">
+    <ul>
+      <li *ngFor="let eleve of eleves">
+        <button (click)="selectEnfent(eleve)">{{ eleve.userName }}</button>
+      </li>
+    </ul>
+    <h6>Click Here after you choose the student</h6>
+    <button *ngIf="selectedEleve" (click)="assignEnfantToParent()">Assign {{ selectedEleve.userName }}</button>
+  </div>
+  <div *ngIf="eleves.length === 0">
+    <p>No students available for this parent.</p>
+  </div>
+</div>
