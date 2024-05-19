@@ -1,0 +1,15 @@
+<div *ngIf="enseignant">
+  <h2>Assign {{ enseignant.firstName }} {{ enseignant.lastName }} to a Class</h2>
+  <div *ngIf="classes.length > 0">
+    <ul>
+      <li *ngFor="let classe of classes">
+        <button (click)="selectClasse(classe)">{{ classe.nom }}</button>
+      </li>
+    </ul>
+    <h6>Click Here after you choose the class</h6>
+    <button *ngIf="selectedClasse" (click)="assignEnseignantToClasse()">Assign {{ selectedClasse.nom }}</button>
+  </div>
+  <div *ngIf="classes.length === 0">
+    <p>No classes available for this enseignant.</p>
+  </div>
+</div>

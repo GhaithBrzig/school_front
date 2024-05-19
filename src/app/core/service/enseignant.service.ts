@@ -35,4 +35,9 @@ export class EnseignantService {
   deleteEnseignant(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  
+  addEnseignantToClasse(classeId: number, enseignantId: number): Observable<Classe> {
+    return this.http.put<Classe>(`${this.baseUrl}/${classeId}/enseignants/${enseignantId}`, {});
+  }
 }

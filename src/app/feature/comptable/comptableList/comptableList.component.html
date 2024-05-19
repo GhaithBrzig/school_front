@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Comptable List</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>CIN</th>
+        <th>User Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email Address</th>
+        <th>Phone Number</th>
+        <!-- <th>valider document</th> -->
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comptable of comptables">
+        <td>{{ comptable.cin }}</td>
+        <td>{{ comptable.userName }}</td>
+        <td>{{ comptable.firstName }}</td>
+        <td>{{ comptable.lastName }}</td>
+        <td>{{ comptable.emailAddress }}</td>
+        <td>{{ comptable.phoneNumber }}</td>
+        <!-- <button (click)="validateDocument(comptable.userId)">validate document of parent</button> -->
+
+        
+
+      </tr>
+    </tbody>
+  </table>
+</div>

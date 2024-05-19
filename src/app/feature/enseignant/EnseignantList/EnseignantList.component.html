@@ -1,0 +1,33 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Matiere</th>
+      <th>Classes</th>
+      <th>Assign to Class</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let enseignant of enseignants">
+      <td>{{ enseignant.userId }}</td>
+      <td>{{ enseignant.firstName }} {{ enseignant.lastName }}</td>
+      <td>{{ enseignant.userName }}</td>
+      <td>{{ enseignant.emailAddress }}</td>
+      <td>{{ enseignant.phoneNumber }}</td>
+      <td>{{ enseignant.matiere }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let classe of enseignant.classes">{{ classe.nom }}</li>
+        </ul>
+      </td>
+      <td>
+        <button (click)="navigateToAssignClasses(enseignant.userId)">Assign to Class</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

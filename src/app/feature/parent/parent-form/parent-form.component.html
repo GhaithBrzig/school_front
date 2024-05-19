@@ -1,0 +1,50 @@
+<div class="container">
+  <h2>Add Parent</h2>
+  <form [formGroup]="parentForm" (submit)="onSubmit()">
+    <div class="form-group">
+      <label for="userName">User Name</label>
+      <input type="text" formControlName="userName" class="form-control" required>
+      <div *ngIf="parentForm.controls['userName'].invalid && (parentForm.controls['userName'].dirty || parentForm.controls['userName'].touched)" class="alert alert-danger">
+        User Name is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" formControlName="firstName" class="form-control" required>
+      <div *ngIf="parentForm.controls['firstName'].invalid && (parentForm.controls['firstName'].dirty || parentForm.controls['firstName'].touched)" class="alert alert-danger">
+        First Name is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" formControlName="lastName" class="form-control" required>
+      <div *ngIf="parentForm.controls['lastName'].invalid && (parentForm.controls['lastName'].dirty || parentForm.controls['lastName'].touched)" class="alert alert-danger">
+        Last Name is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" class="form-control" required>
+      <div *ngIf="parentForm.controls['password'].invalid && (parentForm.controls['password'].dirty || parentForm.controls['password'].touched)" class="alert alert-danger">
+        <div *ngIf="parentForm.controls['password'].errors?.['required']">Password is required.</div>
+        <div *ngIf="parentForm.controls['password'].errors?.['minlength']">Password must be at least 8 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="emailAddress">Email Address</label>
+      <input type="email" formControlName="emailAddress" class="form-control" required>
+      <div *ngIf="parentForm.controls['emailAddress'].invalid && (parentForm.controls['emailAddress'].dirty || parentForm.controls['emailAddress'].touched)" class="alert alert-danger">
+        <div *ngIf="parentForm.controls['emailAddress'].errors?.['required']">Email address is required.</div>
+        <div *ngIf="parentForm.controls['emailAddress'].errors?.['email']">Email address is not valid.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" formControlName="phoneNumber" class="form-control" required pattern="[0-9]*">
+      <div *ngIf="parentForm.controls['phoneNumber'].invalid && (parentForm.controls['phoneNumber'].dirty || parentForm.controls['phoneNumber'].touched)" class="alert alert-danger">
+        Phone Number must only contain numbers.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="parentForm.invalid">Submit</button>
+  </form>
+</div>

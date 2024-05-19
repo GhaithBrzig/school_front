@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Classe } from 'src/app/core/model/Classe';
 import { Eleve } from 'src/app/core/model/Eleve';
 import { ClasseService } from 'src/app/core/service/classe.service';
@@ -43,11 +44,12 @@ export class FormEleveComponent implements OnInit {
     this.eleveService.createEleve(this.newEleve, roleName, this.selectedClasseId).subscribe(
       response => {
         console.log('New eleve created successfully!', response);
-        this.newEleve = new Eleve()
-
+        this.newEleve = new Eleve();
       },
       error => {
         console.error('Error creating new eleve:', error);
+        this.route.navigate(['home/eleves/showEleve']);
+
       }
     );
     this.router.navigate(['/home/eleves/showEleve']); // Navigate to a new route
