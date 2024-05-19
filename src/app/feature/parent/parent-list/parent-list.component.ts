@@ -71,24 +71,33 @@ export class ParentListComponent implements OnInit {
       const fileType = this.selectedFile.type;
       const fileBlob = new Blob([this.selectedFile], { type: fileType });
   
-      this.parentService.uploadPhoto(this.selectedParent.userId, this.selectedFile)
-        .subscribe(
-          (response) => {
-            console.log(response);
-            // Update the photo property of the selected parent
-            if (this.selectedParent) {
-              this.selectedParent.photo = fileBlob;
-            }
-            // Clear the selected file
-            this.selectedFile = null;
-          },
-          (error) => {
-            console.error(error);
-            // Handle error response
-          }
-        );
+      const reader = new FileReader();
+      reader.readAsDataURL(fileBlob);
+      reader.onload = () => {
+        const base64String = reader.result as string;
+  
+        if (this.selectedParent && this.selectedParent.userId && this.selectedFile) { // null check added
+          this.parentService.uploadPhoto(this.selectedParent.userId, this.selectedFile)
+            .subscribe(
+              (response) => {
+                console.log(response);
+                // Update the photo property of the selected parent
+                if (this.selectedParent) {
+                  this.selectedParent.photo = base64String.split(',')[1]; // Remove the data:image/... prefix
+                }
+                // Clear the selected file
+                this.selectedFile = null;
+              },
+              (error) => {
+                console.error(error);
+                // Handle error response
+              }
+            );
+        }
+      };
     }
   }
+  
 
   getPhotoUrl(photo: Blob): string {
     return URL.createObjectURL(photo);

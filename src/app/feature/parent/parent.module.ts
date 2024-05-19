@@ -6,15 +6,16 @@ import { ParentRoutingModule } from './parent-routing.module';
 import { ParentFormComponent } from './parent-form/parent-form.component';
 import { ParentListComponent } from './parent-list/parent-list.component';
 import { AssignEnfentToParentComponent } from './AssignEnfentToParent/AssignEnfentToParent.component';
+import { PhotoUploadComponent } from './photoUpload/photoUpload.component';
 
 @NgModule({
-  declarations: [ParentFormComponent,ParentListComponent,AssignEnfentToParentComponent],
+  declarations: [ParentFormComponent,ParentListComponent,AssignEnfentToParentComponent,PhotoUploadComponent],
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
     ParentRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class ParentModule { }

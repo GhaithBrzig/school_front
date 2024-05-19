@@ -12,7 +12,7 @@
       <th>Document State</th>
 
       <th>Assigned Eleves</th>
-      <th>Actions</th>
+      <th>Image</th>
     </tr>
   </thead>
   <tbody>
@@ -35,9 +35,14 @@
         <ng-template #noElevesAssigned>
           <span>No eleves assigned</span>
         </ng-template>
-      </td>
-      <td>
-      </td>
+        <td>
+          <div class="image-container">
+            <img *ngIf="parent.photo; else noImage" [src]="'data:image/jpeg;base64,' + parent.photo" alt="Article Image" class="article-image">
+            <ng-template #noImage>
+              <span>No photo available</span>
+            </ng-template>
+          </div>
+        </td>
     </tr>
   </tbody>
 </table>

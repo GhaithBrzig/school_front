@@ -76,33 +76,28 @@ export class ValidatePhotoComponent implements OnInit {
     );
   }
 
-  uploadPhoto(parent: Parent) {
-    if (this.selectedFile && this.selectedParent && this.selectedParent.userId) {
-      const fileType = this.selectedFile.type;
-      const fileBlob = new Blob([this.selectedFile], { type: fileType });
+  // uploadPhoto(parent: Parent) {
+  //   if (this.selectedFile && this.selectedParent && this.selectedParent.userId) {
+  //     const fileType = this.selectedFile.type;
+  //     const fileBlob = new Blob([this.selectedFile], { type: fileType });
   
-      this.parentService.uploadPhoto(this.selectedParent.userId, this.selectedFile)
-        .subscribe(
-          (response) => {
-            console.log(response);
-            // Update the photo property of the selected parent
-            if (this.selectedParent) {
-              this.selectedParent.photo = fileBlob;
-            }
-            // Clear the selected file
-            this.selectedFile = null;
-          },
-          (error) => {
-            console.error(error);
-            // Handle error response
-          }
-        );
-    }
-  }
+  //     this.parentService.uploadPhoto(this.selectedParent.userId, this.selectedFile)
+  //       .subscribe(
+  //         (response) => {
+  //           console.log(response);
+  //           if (this.selectedParent) {
+  //             this.selectedParent.photo = fileBlob;
+  //           }
+  //           this.selectedFile = null;
+  //         },
+  //         (error) => {
+  //           console.error(error);
+  //         }
+  //       );
+  //   }
+  // }
 
-  getPhotoUrl(photo: Blob): string {
-    return URL.createObjectURL(photo);
-  }
+
 
   updateParentPhotoState(parentId: number, comptableId: number, photoState: string): void {
     this.comptableService.updateParentPhotoState(parentId, comptableId, photoState).subscribe(
@@ -110,4 +105,37 @@ export class ValidatePhotoComponent implements OnInit {
         console.log(`Parent photo state updated to ${photoState}`);
       },
     )}
+
+    private blobToBase64(blob: Blob): Promise<string | null> {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (reader.result instanceof ArrayBuffer) {
+            const base64string = btoa(
+              Array.from(new Uint8Array(reader.result))
+                .map((byte) => String.fromCharCode(byte))
+                .join('')
+            );
+            resolve('data:image/jpeg;base64,' + base64string);
+          } else {
+            resolve(null);
+          }
+        };
+        reader.onerror = () => {
+          reject(reader.error);
+        };
+        reader.readAsArrayBuffer(blob);
+      });
+    }
+    
+    getPhotoUrl(photo: Uint8Array | Blob | null): string | null {
+      if (photo instanceof Uint8Array) {
+        const blob = new Blob([photo], { type: 'image/jpeg' });
+        return URL.createObjectURL(blob);
+      } else if (photo instanceof Blob) {
+        return URL.createObjectURL(photo);
+      }
+      return null;
+    }
+
 }

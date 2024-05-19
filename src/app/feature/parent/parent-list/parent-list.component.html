@@ -11,6 +11,8 @@
       <th>Phone Number</th>
       <th>Assigned Eleves</th>
       <th>Actions</th>
+      <th>uploaded Image</th>
+
     </tr>
   </thead>
   <tbody>
@@ -34,13 +36,16 @@
       <td>
         <button class="btn btn-danger" (click)="deleteParent(parent.userId!)">Delete</button>
         <button class="btn btn-success" (click)="navigateToAssignClasses(parent.userId)">Assign Eleve</button>
-        <div class="form-group">
-          <div class="custom-file-input">
-            <input type="file" class="custom-file-input" id="customFileInput" (change)="onFileSelected($event, parent)">
-            <label class="custom-file-label" for="customFileInput">Choose a file</label>
-          </div>
+        <a [routerLink]="['/home/parent/photo-upload', parent.userId]" class="btn btn-primary">Upload Photo</a>
+      </td>
+
+      <td>
+        <div class="image-container">
+          <img *ngIf="parent.photo; else noImage" [src]="'data:image/jpeg;base64,' + parent.photo" alt="Article Image" class="article-image">
+          <ng-template #noImage>
+            <span>No photo available</span>
+          </ng-template>
         </div>
-        <button class="btn btn-primary" (click)="uploadPhoto(parent)">Upload Photo</button>
       </td>
     </tr>
   </tbody>

@@ -3,6 +3,6 @@ import {Eleve} from "./Eleve";
 
 export class Parent extends User {
   enfants?: Eleve[];
-  photo?: Blob;
+  photo?: string;
   photoState?:string;
 }
