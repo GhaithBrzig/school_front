@@ -17,6 +17,7 @@ export class EvaluationsListComponent implements OnInit {
   user?: User;
   evaluations?: Evaluation[];
   protected role: Role | undefined;
+  protected roleE: Role | undefined;
 
   constructor(private accountService: AccountService, private evaluationService: EvaluationService, private router: Router) { }
 
@@ -29,6 +30,7 @@ export class EvaluationsListComponent implements OnInit {
 
         if (this.user && this.user.roles) {
           this.role = this.user.roles.find((r) => r.roleName === "enseignant");
+          this.roleE = this.user.roles.find((r) => r.roleName === "eleve");
           if (this.role) {
             // User is an Enseignant
             this.evaluationService.getEvaluationsByEnseignantId(this.user.userId).subscribe(
@@ -40,7 +42,7 @@ export class EvaluationsListComponent implements OnInit {
                 console.error('Error fetching evaluations:', error);
               }
             );
-          } else {
+          } else if (this.roleE) {
             // User is an Eleve
             const eleve = this.user as Eleve;
             if (eleve.classeId) {

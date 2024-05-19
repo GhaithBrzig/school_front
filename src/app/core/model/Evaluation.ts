@@ -7,7 +7,7 @@ export class Evaluation {
   id?: number;
   nom?: string;
   questions?: Question[];
-  classe?: Classe;
+  classes?: Classe[];
   enseignant?: Enseignant;
   evaluationResults?: EvaluationResult[];
   deadline?: Date; // Updated to include deadline

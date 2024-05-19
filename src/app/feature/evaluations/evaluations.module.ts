@@ -10,6 +10,8 @@ import { EvaluationsDetailsComponent } from './evaluations-details/evaluations-d
 import { PassEvaluationComponent } from './pass-evaluation/pass-evaluation.component';
 import { PassedEvaluationsComponent } from './passed-evaluations/passed-evaluations.component';
 
+import { PassedEvaluationResultsByClassComponent } from './passed-evaluation-results-by-class/passed-evaluation-results-by-class.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { PassedEvaluationsComponent } from './passed-evaluations/passed-evaluati
     EvaluationsFormComponent,
     EvaluationsDetailsComponent,
     PassEvaluationComponent,
-    PassedEvaluationsComponent
+    PassedEvaluationsComponent,
+    PassedEvaluationResultsByClassComponent
   ],
   imports: [
     CommonModule,

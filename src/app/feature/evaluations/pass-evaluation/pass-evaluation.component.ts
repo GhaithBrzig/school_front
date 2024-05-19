@@ -114,7 +114,7 @@ export class PassEvaluationComponent implements OnInit, OnDestroy, CanComponentD
     } else if (durationEnum === DurationEnum.MINUTES_60) {
       return 60;
     } else {
-      return 1;
+      return 15;
     }
   }
 
