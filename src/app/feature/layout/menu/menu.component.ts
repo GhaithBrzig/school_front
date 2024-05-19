@@ -15,6 +15,8 @@ export class MenuComponent implements OnInit {
   protected role: Role | undefined;
   protected roleE: Role | undefined;
   protected roleA: Role | undefined;
+  protected roleC: Role | undefined;
+  protected roleP: Role | undefined;
   constructor(private accountService: AccountService) {
   }
 
@@ -25,6 +27,8 @@ export class MenuComponent implements OnInit {
         this.role = this.user.roles.find((r: { roleName: string; }) => r.roleName === "enseignant");
         this.roleE = this.user.roles.find((r: { roleName: string; }) => r.roleName === "eleve");
         this.roleA = this.user.roles.find((r: { roleName: string; }) => r.roleName === "admin");
+        this.roleC = this.user.roles.find((r: { roleName: string; }) => r.roleName === "comptable");
+        this.roleP = this.user.roles.find((r: { roleName: string; }) => r.roleName === "parent");
         console.log('User Profile role:', this.role);
         if (this.user) {
           this.model = [
@@ -59,8 +63,19 @@ export class MenuComponent implements OnInit {
           }
           if (this.roleA) {
             this.model[1].items.push({ label: 'Classes', icon: 'pi pi-fw pi-users', routerLink: ['/home/classes/claaseslist'] });
-            this.model[1].items.push({ label: 'Enseignant', icon: 'pi pi-fw pi-user', routerLink: ['/home/enseignant/list'] });
+            this.model[1].items.push({ label: 'Enseignant', icon: 'pi pi-fw pi-user', routerLink: ['/home/enseignant/ListEnseignant'] });
             this.model[1].items.push({ label: 'Eleves', icon: 'pi pi-fw pi-user-edit', routerLink: ['/home/eleves/showEleve'] });
+            this.model[1].items.push({ label: 'Parent', icon: 'pi pi-fw pi-user-edit', routerLink: ['/home/parent/listParent'] });
+            this.model[1].items.push({ label: 'Comptable', icon: 'pi pi-fw pi-user-edit', routerLink: ['/home/comptable/listComptable'] });
+          }
+          if (this.roleC) {
+            this.model[1].items.push({ label: 'Parents', icon: 'pi pi-fw pi-users', routerLink: ['/home/comptable/validerDoc'] });
+
+          }
+          console.log(this.user)
+          if (this.roleP) {
+            this.model[1].items.push({ label: 'Upload Document', icon: 'pi pi-fw pi-users', routerLink: ['/home/parent/photo-upload', this.user.userId] });
+
           }
         }
       },

@@ -80,7 +80,7 @@ export class ValidatePhotoComponent implements OnInit {
   //   if (this.selectedFile && this.selectedParent && this.selectedParent.userId) {
   //     const fileType = this.selectedFile.type;
   //     const fileBlob = new Blob([this.selectedFile], { type: fileType });
-  
+
   //     this.parentService.uploadPhoto(this.selectedParent.userId, this.selectedFile)
   //       .subscribe(
   //         (response) => {
@@ -100,7 +100,7 @@ export class ValidatePhotoComponent implements OnInit {
 
 
   updateParentPhotoState(parentId: number, comptableId: number, photoState: string): void {
-    this.comptableService.updateParentPhotoState(parentId, comptableId, photoState).subscribe(
+    this.comptableService.updateParentPhotoState(parentId, photoState).subscribe(
       () => {
         console.log(`Parent photo state updated to ${photoState}`);
       },
@@ -127,7 +127,7 @@ export class ValidatePhotoComponent implements OnInit {
         reader.readAsArrayBuffer(blob);
       });
     }
-    
+
     getPhotoUrl(photo: Uint8Array | Blob | null): string | null {
       if (photo instanceof Uint8Array) {
         const blob = new Blob([photo], { type: 'image/jpeg' });

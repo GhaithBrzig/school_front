@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'addComptable',component:ComptableformComponent},
   {path:'listComptable',component:ComptableListComponent},
 
-  {path:'validerDoc/:id',component:ValidatePhotoComponent},
+  {path:'validerDoc',component:ValidatePhotoComponent},
 
 
 

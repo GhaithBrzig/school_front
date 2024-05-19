@@ -17,11 +17,11 @@ export class PhotoUploadComponent implements OnInit {
     private parentService: ParentService,
     private route: ActivatedRoute,
     private router:Router
-) 
+)
 
 
-{  
-  
+{
+
   this.photoForm = this.formBuilder.group({});
 }
 
@@ -57,7 +57,6 @@ export class PhotoUploadComponent implements OnInit {
               (response) => {
                 console.log(response);
                 Swal.fire('Success', 'Photo uploaded successfully', 'success').then(() => {
-                  this.router.navigate(['/home/parent/listParent']);
                 });
               },
               (error) => {
@@ -70,6 +69,6 @@ export class PhotoUploadComponent implements OnInit {
     }
   }
 
-  
+
 
 }
